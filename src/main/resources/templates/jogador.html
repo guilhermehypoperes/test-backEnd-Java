@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogadores</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="DataTables-1.10.18/css/dataTables.bootstrap4.css">
+</head>
+<body>
+<div class="container container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="panel-title">Jogadores Cadastrados</h3>
+        </div>
+        <div class="card-body">
+            <div id="listaDeJogadores">
+                <table id="tableJogador" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Condinome</th>
+                        <th>Grupo</th>
+                        <th>Edição</th>
+                        <th>Exclusão</th>
+                    </tr>
+                    </thead>
+                    <tr th:each="jogador : ${jogadores}">
+                        <td> <span th:text="${jogador.getNome()}"></span> </td>
+                        <td> <span th:text="${jogador.getEmail()}"></span> </td>
+                        <td> <span th:text="${jogador.getTelefone()}"></span> </td>
+                        <td> <span th:text="${jogador.getCodinome()}"></span> </td>
+                        <td> <span th:text="${jogador.getGrupo()}"></span> </td>
+                        <td> <button class="btn btn-dark">Editar</button></td>
+                        <td> <button class="btn btn-dark" onclick="excluirJogador()">Excluir</button></td>
+                    </tr>
+                </table>
+            </div>
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastroJogador">
+                Novo jogador
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalCadastroJogador" tabindex="-1" role="dialog" aria-labelledby="modalCadastroJogadorTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCadastroJogadorTitle">Cadastro de Jogador</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form class="needs-validation" novalidate id="formCadastroJogador" action="salvar" method="post">
+                    <div class="form-group">
+                        <label for="nomeJogador">Nome: </label>
+                        <input id="nomeJogador" type="text" class="form-control" name="nome" required/>
+                        <div class="invalid-feedback">
+                            Preencher o nome.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailJogador">E-mail:</label>
+                        <input id="emailJogador" type="email" class="form-control" name="email" required/>
+                        <div class="invalid-feedback">
+                            Preencher o e-mail.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefoneJogador">Telefone:</label>
+                        <input id="telefoneJogador" type="tel" class="form-control" name="telefone"/>
+                    </div>
+
+                    <label>Quero ser do grupo:</label>
+
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="radioLigaDaJustica" name="grupo" class="custom-control-input" value="Liga da Justiça" checked>
+                        <label class="custom-control-label" for="radioLigaDaJustica">Liga da Justiça</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="radioOsVingadores" name="grupo" class="custom-control-input" value="Vingadores">
+                        <label class="custom-control-label" for="radioOsVingadores">Os Vingadores</label>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btnOk" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="btnCancel" type="submit" form="formCadastroJogador" class="btn btn-primary">Cadastrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
+<script src="jquery/jquery-3.3.1.min.js"></script>
+<script src="popper/popper.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="bootstrap/js/bootstrap-validation.js"></script>
+<script src="js/jogador.js"></script>
+<script src="notify/notify.min.js"></script>
+<script src="DataTables-1.10.18/js/jquery.dataTables.js"></script>
+<script src="DataTables-1.10.18/js/dataTables.bootstrap4.js"></script>
+
+
+
